@@ -12,8 +12,11 @@
 [![MCP](https://img.shields.io/badge/MCP-ready-FF6B35)](./MCP_INTEGRATION.md)
 [![Data](https://img.shields.io/badge/%E5%9B%BE%E6%96%87%E7%BB%91%E5%AE%9A-27%2F27-FFC72C)](./scripts/lint-data.mjs)
 [![License](https://img.shields.io/badge/License-MIT-2F9E5F)](./LICENSE)
+[![Live Demo](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-121.43.48.154-FF6B35)](http://121.43.48.154/)
 
 麦当劳 WorkBuddy 开发者挑战赛 · 参赛作品
+
+**在线体验**：http://121.43.48.154/ 　|　 **源码**：https://github.com/nahidapc/mcd-tray-app
 
 </div>
 
@@ -30,7 +33,7 @@
 | **前端** | React 19 · TypeScript strict · Vite 7 · Tailwind CSS v4 · Framer Motion · Zustand · Recharts |
 | **AI 集成** | 麦当劳 MCP Server（`getFoodNutrition` / `calculateMealScore` / `submitOrderMock`），未配置时自动降级本地数据 |
 | **数据** | 27 款餐品 · 27 张专属插画（一 id 一图，构建期断言）· 5 张优惠券 |
-| **体积** | CSS 36.7 kB（gzip 7.5 kB）；JS 728 kB 拆 3 包：主包 272 kB / charts 295 kB / motion 161 kB（gzip 合计 ≈ 230 kB） |
+| **体积** | CSS 37.4 kB（gzip 7.6 kB）；JS 728 kB 拆 3 包：主包 272 kB / charts 295 kB / motion 161 kB（gzip 合计 236.9 kB） |
 
 ## 界面
 
@@ -106,6 +109,23 @@ cp .env.example .env
 | `/?mode=taste` | 味觉模式（好吃优先） |
 | `/?mode=nutrition` | 营养模式（蛋白优先） |
 | `/?mode=value` | 省钱模式（性价比优先） |
+
+## 部署
+
+构建产物是纯静态文件（46 个，4.47 MB），任意静态服务器都能托管，无需后端与数据库：
+
+```bash
+npm run build          # 产出 dist/：index.html + assets/ + images/ + screenshots/
+```
+
+| 方式 | 做法 |
+|---|---|
+| **Nginx** | 把 `dist/` 里的内容放到站点根目录，关键是 SPA 回退：`try_files $uri $uri/ /index.html;` |
+| **宝塔面板** | 新建「纯静态」站点 → 上传 zip → 解压到站点根目录 |
+
+> 两个容易踩的坑：
+> ① 图片与脚本走绝对路径（`/images/foods/…`、`/assets/…`），**只能部署在根路径**；要挂子路径得先改 `vite.config.ts` 的 `base` 再重新构建。
+> ② 未配置 `VITE_MCD_MCP_URL` 时自动降级本地营养库，线上 Demo 即此模式，可离线演示。
 
 ## MCP 集成
 
@@ -197,7 +217,7 @@ python scripts/drive_checkout.py      # 需 websocket-client 与 Edge
 | [CONTEST_DECLARATION.md](./CONTEST_DECLARATION.md) | 原创声明、数据脱敏、无敏感信息 |
 | [MCP_INTEGRATION.md](./MCP_INTEGRATION.md) | Tool 清单、调用时序、降级策略、业务价值 |
 | [mcp-config.example.json](./mcp-config.example.json) | 符合 MCP 规范的配置样例（全环境变量占位） |
-| [workbuddy.md](./workbuddy.md) | WorkBuddy 对话记录（结构化模板） |
+| [workbuddy.md](./workbuddy.md) | WorkBuddy 完整对话记录（17 轮，含原始 Prompt 与产出物） |
 
 ## 说明
 
