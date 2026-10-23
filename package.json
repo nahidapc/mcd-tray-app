@@ -1,0 +1,59 @@
+{
+  "name": "mcd-tray-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "麦麦餐盘 · McD Tray —— 卡通风的麦当劳套餐搭配助手：拖拽摆盘、多餐盘、营养雷达、防浪费预警、优惠券与结账闭环，并接入麦当劳 MCP Server。",
+  "author": {
+    "name": "nahidapc",
+    "email": "2845023150@qq.com",
+    "url": "https://github.com/nahidapc"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "typescript",
+    "zustand",
+    "framer-motion",
+    "tailwindcss",
+    "mcdonalds",
+    "mcp",
+    "meal-planner",
+    "nutrition"
+  ],
+  "homepage": "https://github.com/nahidapc/mcd-tray-app#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nahidapc/mcd-tray-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nahidapc/mcd-tray-app/issues"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint:data": "node scripts/lint-data.mjs",
+    "check": "npm run lint:data && npm run typecheck"
+  },
+  "dependencies": {
+    "framer-motion": "^14.5.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "recharts": "^3.10.1",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.0"
+  }
+}

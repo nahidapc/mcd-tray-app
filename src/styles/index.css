@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* ============================================================
+   主题变量：麦记红黄 + 奶油底 + 暖棕文字
+   ============================================================ */
+@theme {
+  --color-mcd-red: #e23a2e;
+  --color-mcd-red-deep: #b9241a;
+  --color-mcd-yellow: #ffc72c;
+  --color-mcd-yellow-deep: #f0a30a;
+  --color-cream: #fff7e8;
+  --color-cream-deep: #fdeccd;
+  --color-ink: #43301f;
+  --color-ink-soft: #8a715a;
+  --color-mint: #2f9e5f;
+  --color-plate: #ffce7a;
+  --color-plate-deep: #e9a94a;
+  --font-round: "Nunito", "Varela Round", ui-rounded, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-round);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  /* 奶油底 + 淡淡的圆点纸纹，卡通感 */
+  background-image: radial-gradient(
+    rgba(226, 58, 46, 0.07) 1.5px,
+    transparent 1.6px
+  );
+  background-size: 22px 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 注意：不要在这里写 color，否则会盖掉 Tailwind 的 text-* 工具类 */
+button {
+  font-family: inherit;
+}
+
+/* 滚动条：细一点，圆润一点 */
+.scroll-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #e8cfa6;
+  border-radius: 99px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================================================
+   餐盘：大圆角厚实托盘 + 柔和内阴影 + 手绘描边
+   ============================================================ */
+.plate {
+  position: relative;
+  isolation: isolate;
+  border-radius: 52px;
+  border: 5px solid #e2a049;
+  background: radial-gradient(
+    120% 130% at 50% -10%,
+    #ffe1a6 0%,
+    #ffd180 46%,
+    #f6bd63 100%
+  );
+  box-shadow:
+    inset 0 6px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -16px 26px rgba(190, 122, 32, 0.3),
+    0 10px 0 #d99339,
+    0 30px 46px -20px rgba(150, 90, 20, 0.55);
+  transition: box-shadow 0.2s ease;
+}
+
+/* 盘内凹槽：让人看得出这是个盘子 */
+.plate__well {
+  position: absolute;
+  inset: 5.5%;
+  border-radius: 44px;
+  background: radial-gradient(
+    120% 120% at 50% 4%,
+    #ffdfa5 0%,
+    #ffd07e 52%,
+    #f8c069 100%
+  );
+  box-shadow:
+    inset 0 10px 18px rgba(190, 122, 32, 0.28),
+    inset 0 -8px 14px rgba(255, 255, 255, 0.5);
+}
+
+/* 手绘虚线环，增加插画感 */
+.plate__ring {
+  position: absolute;
+  inset: 9%;
+  border-radius: 40px;
+  border: 3px dashed rgba(214, 143, 51, 0.42);
+  pointer-events: none;
+}
+
+/* 拖拽悬停：盘子亮起来 */
+.plate.is-over {
+  box-shadow:
+    inset 0 6px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -16px 26px rgba(190, 122, 32, 0.3),
+    0 10px 0 #d99339,
+    0 0 0 8px rgba(255, 199, 44, 0.45),
+    0 30px 46px -20px rgba(150, 90, 20, 0.55);
+}
+
+/* ============================================================
+   盘中食物：柔光阴影，让它“贴”在盘子上
+   ============================================================ */
+.food-shadow {
+  filter: drop-shadow(0 12px 14px rgba(176, 96, 12, 0.32))
+    drop-shadow(0 3px 3px rgba(120, 60, 0, 0.18));
+}
+
+.food-shadow--soft {
+  filter: drop-shadow(0 8px 12px rgba(190, 120, 30, 0.25));
+}
+
+/* 盘中实例的抓取手感 */
+.plate-item {
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+}
+.plate-item:active {
+  cursor: grabbing;
+}
+
+/* ============================================================
+   货架卡片：厚圆角 + 底部实心阴影，Q 弹
+   ============================================================ */
+.food-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 0 #f1ddb9, 0 12px 22px -14px rgba(150, 100, 40, 0.6);
+}
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 #efd7ad, 0 18px 26px -14px rgba(150, 100, 40, 0.65);
+}
+.food-card:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #f1ddb9;
+}
+
+/* ============================================================
+   Chunky 按钮：3D 感，按下去会下沉
+   ============================================================ */
+.chunky {
+  border-radius: 999px;
+  font-weight: 800;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.2s ease;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.16);
+}
+.chunky:hover {
+  filter: brightness(1.04);
+}
+.chunky:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+
+/* 数字用等宽，避免跳动 */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 底部抽屉 */
+.sheet {
+  box-shadow: 0 -12px 40px -12px rgba(120, 80, 20, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

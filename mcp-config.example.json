@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "mcdonalds-menu": {
+      "type": "http",
+      "url": "${MCD_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${MCD_MCP_TOKEN}",
+        "X-Client-Id": "${MCD_CLIENT_ID}"
+      }
+    },
+    "mcdonalds-menu-stdio": {
+      "command": "npx",
+      "args": ["-y", "@mcdonalds/mcp-server@latest", "--locale", "zh-CN"],
+      "env": {
+        "MCD_API_KEY": "${MCD_API_KEY}",
+        "MCD_API_BASE": "${MCD_API_BASE}",
+        "MCD_STORE_ID": "${MCD_STORE_ID}"
+      }
+    }
+  }
+}
