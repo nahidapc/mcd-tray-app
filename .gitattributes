@@ -1,0 +1,12 @@
+# 统一换行，避免 Windows / macOS 协作时整文件 diff
+* text=auto eol=lf
+
+# 图片按二进制处理，不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+
+# 生成物已被 .gitignore 忽略，这里再标注一次便于语言统计
+*.svg text
